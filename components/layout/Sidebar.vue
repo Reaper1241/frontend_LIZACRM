@@ -18,7 +18,7 @@ const toggleSubmenu = (menu: string) => {
   <aside class="px-5 py-8 bg-sidebar h-full relative w-full flex flex-col">
     <!-- Логотип -->
     <NuxtLink to="/" class="mb-10 block">
-      <NuxtImg src="logo.png" width="100px" class="mx-auto"/>
+      <NuxtImg src="logo.svg" width="100px" class="mx-auto"/>
     </NuxtLink>
 
     <!-- Основное меню -->
@@ -27,7 +27,7 @@ const toggleSubmenu = (menu: string) => {
         <!-- Дашборд -->
         <li>
           <NuxtLink 
-            to="/dashboard" 
+            to="/" 
             class="flex items-center p-3 rounded-lg hover:bg-sidebar-hover transition-colors"
             active-class="bg-sidebar-active"
           >
@@ -39,7 +39,7 @@ const toggleSubmenu = (menu: string) => {
         <!-- Клиенты -->
         <li>
           <div 
-            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer"
+            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('customers')"
           >
             <div class="flex items-center">
@@ -48,52 +48,54 @@ const toggleSubmenu = (menu: string) => {
             </div>
             <Icon 
               name="mdi:chevron-down" 
-              class="text-xl transition-transform"
+              class="text-xl transition-transform duration-200"
               :class="{'transform rotate-180': openSubmenus.customers}"
             />
           </div>
           
-          <ul 
-            v-show="openSubmenus.customers" 
-            class="ml-8 mt-1 space-y-1"
+          <div 
+            class="overflow-hidden transition-all duration-300 ease-in-out"
+            :class="{'max-h-0': !openSubmenus.customers, 'max-h-96': openSubmenus.customers}"
           >
-            <li>
-              <NuxtLink 
-                to="/customers/list" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:format-list-bulleted" class="text-lg mr-2"/>
-                <span>Список клиентов</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink 
-                to="/customers/groups" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:account-multiple" class="text-lg mr-2"/>
-                <span>Группы клиентов</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink 
-                to="/customers/import" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:database-import" class="text-lg mr-2"/>
-                <span>Импорт клиентов</span>
-              </NuxtLink>
-            </li>
-          </ul>
+            <ul class="ml-8 mt-1 space-y-1">
+              <li>
+                <NuxtLink 
+                  to="/clients" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:format-list-bulleted" class="text-lg mr-2"/>
+                  <span>Список клиентов</span>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink 
+                  to="/customers/groups" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:account-multiple" class="text-lg mr-2"/>
+                  <span>Группы клиентов</span>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink 
+                  to="/customers/import" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:database-import" class="text-lg mr-2"/>
+                  <span>Импорт клиентов</span>
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
         </li>
 
         <!-- Продажи -->
         <li>
           <div 
-            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer"
+            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('sales')"
           >
             <div class="flex items-center">
@@ -102,52 +104,54 @@ const toggleSubmenu = (menu: string) => {
             </div>
             <Icon 
               name="mdi:chevron-down" 
-              class="text-xl transition-transform"
+              class="text-xl transition-transform duration-200"
               :class="{'transform rotate-180': openSubmenus.sales}"
             />
           </div>
           
-          <ul 
-            v-show="openSubmenus.sales" 
-            class="ml-8 mt-1 space-y-1"
+          <div 
+            class="overflow-hidden transition-all duration-300 ease-in-out"
+            :class="{'max-h-0': !openSubmenus.sales, 'max-h-96': openSubmenus.sales}"
           >
-            <li>
-              <NuxtLink 
-                to="/sales/leads" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:lightbulb-on" class="text-lg mr-2"/>
-                <span>Лиды</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink 
-                to="/sales/deals" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:handshake" class="text-lg mr-2"/>
-                <span>Сделки</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink 
-                to="/sales/invoices" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:receipt" class="text-lg mr-2"/>
-                <span>Счета</span>
-              </NuxtLink>
-            </li>
-          </ul>
+            <ul class="ml-8 mt-1 space-y-1">
+              <li>
+                <NuxtLink 
+                  to="/sales/leads" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:lightbulb-on" class="text-lg mr-2"/>
+                  <span>Лиды</span>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink 
+                  to="/sales/deals" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:handshake" class="text-lg mr-2"/>
+                  <span>Сделки</span>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink 
+                  to="/sales/invoices" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:receipt" class="text-lg mr-2"/>
+                  <span>Счета</span>
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
         </li>
 
         <!-- Маркетинг -->
         <li>
           <div 
-            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer"
+            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('marketing')"
           >
             <div class="flex items-center">
@@ -156,36 +160,38 @@ const toggleSubmenu = (menu: string) => {
             </div>
             <Icon 
               name="mdi:chevron-down" 
-              class="text-xl transition-transform"
+              class="text-xl transition-transform duration-200"
               :class="{'transform rotate-180': openSubmenus.marketing}"
             />
           </div>
           
-          <ul 
-            v-show="openSubmenus.marketing" 
-            class="ml-8 mt-1 space-y-1"
+          <div 
+            class="overflow-hidden transition-all duration-300 ease-in-out"
+            :class="{'max-h-0': !openSubmenus.marketing, 'max-h-96': openSubmenus.marketing}"
           >
-            <li>
-              <NuxtLink 
-                to="/marketing/email" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:email-send" class="text-lg mr-2"/>
-                <span>Email рассылки</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink 
-                to="/marketing/campaigns" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:chart-line" class="text-lg mr-2"/>
-                <span>Компании</span>
-              </NuxtLink>
-            </li>
-          </ul>
+            <ul class="ml-8 mt-1 space-y-1">
+              <li>
+                <NuxtLink 
+                  to="/marketing/email" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:email-send" class="text-lg mr-2"/>
+                  <span>Email рассылки</span>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink 
+                  to="/marketing/campaigns" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:chart-line" class="text-lg mr-2"/>
+                  <span>Компании</span>
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
         </li>
 
         <!-- Задачи -->
@@ -227,7 +233,7 @@ const toggleSubmenu = (menu: string) => {
         <!-- Настройки -->
         <li class="pt-4 mt-4 border-t border-sidebar-divider">
           <div 
-            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer"
+            class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('settings')"
           >
             <div class="flex items-center">
@@ -236,46 +242,48 @@ const toggleSubmenu = (menu: string) => {
             </div>
             <Icon 
               name="mdi:chevron-down" 
-              class="text-xl transition-transform"
+              class="text-xl transition-transform duration-200"
               :class="{'transform rotate-180': openSubmenus.settings}"
             />
           </div>
           
-          <ul 
-            v-show="openSubmenus.settings" 
-            class="ml-8 mt-1 space-y-1"
+          <div 
+            class="overflow-hidden transition-all duration-300 ease-in-out"
+            :class="{'max-h-0': !openSubmenus.settings, 'max-h-96': openSubmenus.settings}"
           >
-            <li>
-              <NuxtLink 
-                to="/settings/users" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:account-supervisor" class="text-lg mr-2"/>
-                <span>Пользователи</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink 
-                to="/settings/roles" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:shield-account" class="text-lg mr-2"/>
-                <span>Роли и доступы</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink 
-                to="/settings/integrations" 
-                class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
-                active-class="bg-sidebar-active"
-              >
-                <Icon name="mdi:connection" class="text-lg mr-2"/>
-                <span>Интеграции</span>
-              </NuxtLink>
-            </li>
-          </ul>
+            <ul class="ml-8 mt-1 space-y-1">
+              <li>
+                <NuxtLink 
+                  to="/settings/users" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:account-supervisor" class="text-lg mr-2"/>
+                  <span>Пользователи</span>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink 
+                  to="/settings/roles" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:shield-account" class="text-lg mr-2"/>
+                  <span>Роли и доступы</span>
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink 
+                  to="/settings/integrations" 
+                  class="flex items-center p-2 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  active-class="bg-sidebar-active"
+                >
+                  <Icon name="mdi:connection" class="text-lg mr-2"/>
+                  <span>Интеграции</span>
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </nav>
@@ -290,7 +298,7 @@ const toggleSubmenu = (menu: string) => {
           <Icon name="mdi:account" class="text-lg"/>
         </div>
         <div class="flex-1 min-w-0">
-          <p class="font-medium truncate">Иван Иванов</p>
+          <p class="font-medium truncate">Иван Льгов</p>
           <p class="text-xs text-gray-400 truncate">Администратор</p>
         </div>
       </NuxtLink>
@@ -300,7 +308,7 @@ const toggleSubmenu = (menu: string) => {
 
 <style lang="css" scoped>
 .bg-sidebar {
-  background-color: #bc0000; /* slate-800 */
+  background-color: #ff44f6; /* slate-800 */
 }
 
 .bg-sidebar-hover {
@@ -313,5 +321,26 @@ const toggleSubmenu = (menu: string) => {
 
 .bg-sidebar-divider {
   border-color: #ff90d4; /* slate-700 */
+}
+
+/* Плавная анимация для подменю */
+.transition-all {
+  transition-property: all;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.ease-in-out {
+  transition-timing-function: ease-in-out;
+}
+
+.max-h-0 {
+  max-height: 0;
+}
+
+.max-h-96 {
+  max-height: 24rem; /* или достаточно большое значение для вашего контента */
 }
 </style>

@@ -1,20 +1,23 @@
 <script lang="ts" setup>
-
+// import LayoutSidebar from '~/components/LayoutSidebar.vue';
 </script>
 
-
 <template>
-    <section class="grid" style="min-height: 100vh">
-        <LayoutSidebar/>
-        <div>
-            <slot />
-        </div>
-    </section>
+  <section class="grid" style="min-height: 100vh">
+    <LayoutSidebar />
+    <div class="content">
+      <!-- Сюда подставляется контент из pages/ -->
+      <slot />
+    </div>
+  </section>
 </template>
 
 <style scoped>
-    .grid{
-        display: grid;
-        grid-template-columns: 1fr 6fr;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+.content {
+  padding: 20px;
+}
 </style>

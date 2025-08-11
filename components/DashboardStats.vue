@@ -3,7 +3,7 @@
     <h2 class="dashboard-title">Статистика звонков</h2>
     
     <div class="stats-grid">
-      <!-- Карточка "Сегодня" -->
+
       <div class="stat-card today">
         <div class="stat-value">{{ stats.today }}</div>
         <div class="stat-label">Сегодня</div>
@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <!-- Карточка "Неделя" -->
+
       <div class="stat-card week">
         <div class="stat-value">{{ stats.week }}</div>
         <div class="stat-label">За неделю</div>
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <!-- Карточка "Месяц" -->
+
       <div class="stat-card month">
         <div class="stat-value">{{ stats.month }}</div>
         <div class="stat-label">За месяц</div>
@@ -34,21 +34,20 @@
 </template>
 
 <script setup>
-// Моковые данные (в реальном проекте замените на API-запрос)
+
 const stats = {
-  today: 24,         // Звонков сегодня
-  todayChange: 5,    // Изменение в % (может быть отрицательным)
-  week: 158,         // Звонков за неделю
-  weekChange: 12,    // Изменение в %
-  month: 642,        // Звонков за месяц
-  monthChange: -3,   // Изменение в %
+  today: 24,        
+  todayChange: 5,    
+  week: 158,         
+  weekChange: 12,    
+  month: 642,        
+  monthChange: -3,   
 };
 </script>
 
 <style scoped>
 .dashboard {
   font-family: Arial, sans-serif;
-  /* max-width: 1000px; */
   margin: 20px auto;
   padding: 20px;
   background: #fff;
@@ -104,6 +103,6 @@ const stats = {
   font-weight: 500;
 }
 
-.positive { color: #27ae60; }  /* Зеленый для роста */
-.negative { color: #e74c3c; }  /* Красный для снижения */
+.positive { color: #27ae60; }  
+.negative { color: #e74c3c; }  
 </style>

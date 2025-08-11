@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-// Состояние раскрытия подменю
+
 const openSubmenus = ref<Record<string, boolean>>({
   customers: false,
   sales: false,
@@ -16,15 +16,12 @@ const toggleSubmenu = (menu: string) => {
 
 <template>
   <aside class="px-5 py-8 bg-sidebar h-full relative w-full flex flex-col">
-    <!-- Логотип -->
     <NuxtLink to="/" class="mb-10 block">
       <NuxtImg src="logo.svg" width="100px" class="mx-auto"/>
     </NuxtLink>
 
-    <!-- Основное меню -->
     <nav class="flex-1 overflow-y-auto">
       <ul class="space-y-2">
-        <!-- Дашборд -->
         <li>
           <NuxtLink 
             to="/" 
@@ -36,7 +33,6 @@ const toggleSubmenu = (menu: string) => {
           </NuxtLink>
         </li>
 
-        <!-- Клиенты -->
         <li>
           <div 
             class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
@@ -91,8 +87,6 @@ const toggleSubmenu = (menu: string) => {
             </ul>
           </div>
         </li>
-
-        <!-- Продажи -->
         <li>
           <div 
             class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
@@ -147,8 +141,6 @@ const toggleSubmenu = (menu: string) => {
             </ul>
           </div>
         </li>
-
-        <!-- Маркетинг -->
         <li>
           <div 
             class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
@@ -193,8 +185,6 @@ const toggleSubmenu = (menu: string) => {
             </ul>
           </div>
         </li>
-
-        <!-- Задачи -->
         <li>
           <NuxtLink 
             to="/tasks" 
@@ -205,8 +195,6 @@ const toggleSubmenu = (menu: string) => {
             <span>Задачи</span>
           </NuxtLink>
         </li>
-
-        <!-- Календарь -->
         <li>
           <NuxtLink 
             to="/calendar" 
@@ -218,7 +206,7 @@ const toggleSubmenu = (menu: string) => {
           </NuxtLink>
         </li>
 
-        <!-- Отчеты -->
+
         <li>
           <NuxtLink 
             to="/reports" 
@@ -229,8 +217,6 @@ const toggleSubmenu = (menu: string) => {
             <span>Отчеты</span>
           </NuxtLink>
         </li>
-
-        <!-- Настройки -->
         <li class="pt-4 mt-4 border-t border-sidebar-divider">
           <div 
             class="flex items-center justify-between p-3 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
@@ -287,8 +273,6 @@ const toggleSubmenu = (menu: string) => {
         </li>
       </ul>
     </nav>
-
-    <!-- Профиль пользователя -->
     <div class="pt-4 mt-auto border-t border-sidebar-divider">
       <NuxtLink 
         to="/profile" 
@@ -308,22 +292,21 @@ const toggleSubmenu = (menu: string) => {
 
 <style lang="css" scoped>
 .bg-sidebar {
-  background-color: #ff44f6; /* slate-800 */
+  background-color: #ff44f6; 
 }
 
 .bg-sidebar-hover {
-  background-color: #fd5ec0; /* slate-700 */
+  background-color: #fd5ec0; 
 }
 
 .bg-sidebar-active {
-  background-color: #ff90d4; /* slate-600 */
+  background-color: #ff90d4; 
 }
 
 .bg-sidebar-divider {
-  border-color: #ff90d4; /* slate-700 */
+  border-color: #ff90d4; 
 }
 
-/* Плавная анимация для подменю */
 .transition-all {
   transition-property: all;
 }
@@ -341,6 +324,6 @@ const toggleSubmenu = (menu: string) => {
 }
 
 .max-h-96 {
-  max-height: 24rem; /* или достаточно большое значение для вашего контента */
+  max-height: 24rem; 
 }
 </style>

@@ -5,5 +5,10 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
-  ]
+  ],
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: 'http://localhost:8081/api/v1'
+    }
+  }
 })

@@ -4,28 +4,39 @@
       <div class="header-field">Телефон</div>
       <div class="header-field">Почта</div>
       <div class="header-field">Имя</div>
-      <div class="header-field">Салон</div>
+      <div class="header-field">Последнее время логина</div>
     </div>
     <div 
-      v-for="client in clients" 
+      v-for="client in users" 
       :key="client.id" 
       class="client-card"
     >
-      <div class="client-field phone">{{ client.phone }}</div>
-      <div class="client-field email">{{ client.email }}</div>
-      <div class="client-field name">{{ client.name }}</div>
-      <div class="client-field salon">{{ client.salon }}</div>
+      <div class="client-field phone">{{ client.phone.String }}</div>
+      <div class="client-field email">{{ client.email.String }}</div>
+      <div class="client-field name">{{ client.first_name.String }} {{ client.last_name.String }}</div>
+      <div class="client-field salon">{{ parseDate(client.last_login_at.Time) }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
+import axios from 'axios';
+import { parseISO, format } from 'date-fns';
 
-const clients = [
-  { id: 1, phone: "+7 (999) 123-45-67", email: "ivanov@example.com", name: "Иван Иванов", salon: "Салон на Ленина" },
-  { id: 2, phone: "+7 (987) 654-32-10", email: "petrov@example.com", name: "Петр Петров", salon: "Салон на Гагарина" },
-  { id: 3, phone: "+7 (916) 777-88-99", email: "sidorova@example.com", name: "Мария Сидорова", salon: "Салон Центральный" },
-];
+
+const parseDate = (time) => {
+  let date = parseISO(time);
+  return format(date, 'dd.MM.yyyy HH:mm')
+}
+
+const config = useRuntimeConfig()
+const apiUrl = config.public.apiBaseUrl
+
+let users = ref([])
+
+axios.get(apiUrl + '/users').then((response) => {
+  users.value = response.data.users
+})
 </script>
 
 <style scoped>

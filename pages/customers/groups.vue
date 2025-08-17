@@ -1,7 +1,7 @@
 <template>
-  <ClientGroups />
+  <NuxtLayout>
+    <ClientGroups/>
+  </NuxtLayout>
 </template>
 
-<script setup>
-import ClientGroups from '~/components/ClientGroups.vue'
-</script>
+<script setup></script>

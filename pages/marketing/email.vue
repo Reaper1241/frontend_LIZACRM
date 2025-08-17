@@ -1,7 +1,7 @@
 <template>
-  <EmailCampaigns />
+  <NuxtLayout>
+    <EmailCampaigns/>
+  </NuxtLayout>
 </template>
 
-<script setup>
-import EmailCampaigns from '~/components/marketing/EmailCampaigns.vue'
-</script>
+<script setup></script>

@@ -294,8 +294,8 @@ const toggleSubmenu = (menu: string) => {
 .bg-sidebar {
   background: linear-gradient(
     135deg,
-    rgba(71, 51, 195, 0.6) 0%,    
-    rgba(138, 43, 226, 0.7) 100%
+    rgba(113, 94, 232, 0.6) 0%,
+    rgba(147, 79, 210, 0.7) 100%
   );
   
   backdrop-filter: blur(12px) saturate(180%);

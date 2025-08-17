@@ -1,7 +1,7 @@
 <template>
-  <InvoicesList />
+  <NuxtLayout>
+    <InvoicesList/>
+  </NuxtLayout>
 </template>
 
-<script setup>
-import InvoicesList from '~/components/sales/InvoicesList.vue'
-</script>
+<script setup></script>

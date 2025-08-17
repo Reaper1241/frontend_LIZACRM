@@ -1,7 +1,7 @@
 <template>
-  <DealsList />
+  <NuxtLayout>
+    <DealsList/>
+  </NuxtLayout>
 </template>
 
-<script setup>
-import DealsList from '~/components/sales/DealsList.vue'
-</script>
+<script setup></script>

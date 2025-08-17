@@ -1,7 +1,7 @@
 <template>
-  <TasksManager />
+  <NuxtLayout>
+    <TasksManager/>
+  </NuxtLayout>
 </template>
 
-<script setup>
-import TasksManager from '~/components/TasksManager.vue'
-</script>
+<script setup></script>

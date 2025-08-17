@@ -1,7 +1,7 @@
 <template>
-  <ClientImport />
+  <NuxtLayout>
+    <ClientImport/>
+  </NuxtLayout>
 </template>
 
-<script setup>
-import ClientImport from '~/components/ClientImport.vue'
-</script>
+<script setup></script>

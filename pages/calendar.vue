@@ -1,5 +1,7 @@
 <template>
+  <NuxtLayout>
   <CalendarView />
+  </NuxtLayout>
 </template>
 
 <script setup>

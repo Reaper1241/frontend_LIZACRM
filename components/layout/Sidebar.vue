@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-
+const { $emit } = useNuxtApp()
 
 const openSubmenus = ref<Record<string, boolean>>({
   customers: false,
@@ -12,11 +11,19 @@ const openSubmenus = ref<Record<string, boolean>>({
 const toggleSubmenu = (menu: string) => {
   openSubmenus.value[menu] = !openSubmenus.value[menu]
 }
+
+const closeSidebar = () => {
+  $emit('close')
+}
 </script>
 
 <template>
   <aside class="bg-sidebar py-8 h-full relative w-full flex flex-col">
-    <NuxtLink to="/" class="mb-10 block">
+    <button class="absolute top-4 right-4 md:hidden text-white z-10" @click="closeSidebar">
+      <Icon name="mdi:close" class="text-2xl" />
+    </button>
+
+    <NuxtLink to="/" class="mb-10 block" @click="closeSidebar">
       <NuxtImg src="logo.svg" width="100px" class="mx-auto"/>
     </NuxtLink>
 
@@ -25,20 +32,20 @@ const toggleSubmenu = (menu: string) => {
         <li>
           <NuxtLink 
             to="/" 
-            class="flex items-center sidebar-item  p-2 hover:bg-sidebar-hover transition-colors"
+            class="flex items-center sidebar-item p-2 hover:bg-sidebar-hover transition-colors"
             active-class="bg-sidebar-active"
+            @click="closeSidebar"
           >
             <Icon name="mdi:view-dashboard" class="text-xl mr-3"/>
             <span>Дашборд</span>
           </NuxtLink>
         </li>
-
         <li>
           <div 
-            class="flex items-center sidebar-item  justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
+            class="flex items-center sidebar-item justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('customers')"
           >
-            <div class="flex items-center sidebar-item ">
+            <div class="flex items-center sidebar-item">
               <Icon name="mdi:account-group" class="text-xl mr-3"/>
               <span>Клиенты</span>
             </div>
@@ -57,8 +64,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/clients" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:format-list-bulleted" class="text-lg mr-2"/>
                   <span>Список клиентов</span>
@@ -67,8 +75,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/customers/groups" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:account-multiple" class="text-lg mr-2"/>
                   <span>Группы клиентов</span>
@@ -77,8 +86,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/customers/import" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:database-import" class="text-lg mr-2"/>
                   <span>Импорт клиентов</span>
@@ -89,10 +99,10 @@ const toggleSubmenu = (menu: string) => {
         </li>
         <li>
           <div 
-            class="flex items-center sidebar-item  justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
+            class="flex items-center sidebar-item justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('sales')"
           >
-            <div class="flex items-center sidebar-item ">
+            <div class="flex items-center sidebar-item">
               <Icon name="mdi:sale" class="text-xl mr-3"/>
               <span>Продажи</span>
             </div>
@@ -111,8 +121,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/sales/leads" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:lightbulb-on" class="text-lg mr-2"/>
                   <span>Лиды</span>
@@ -121,8 +132,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/sales/deals" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:handshake" class="text-lg mr-2"/>
                   <span>Сделки</span>
@@ -131,8 +143,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/sales/invoices" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:receipt" class="text-lg mr-2"/>
                   <span>Счета</span>
@@ -143,10 +156,10 @@ const toggleSubmenu = (menu: string) => {
         </li>
         <li>
           <div 
-            class="flex items-center sidebar-item  justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
+            class="flex items-center sidebar-item justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('marketing')"
           >
-            <div class="flex items-center sidebar-item ">
+            <div class="flex items-center sidebar-item">
               <Icon name="mdi:email-newsletter" class="text-xl mr-3"/>
               <span>Маркетинг</span>
             </div>
@@ -165,8 +178,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/marketing/email" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:email-send" class="text-lg mr-2"/>
                   <span>Email рассылки</span>
@@ -175,8 +189,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/marketing/campaigns" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:chart-line" class="text-lg mr-2"/>
                   <span>Компании</span>
@@ -188,8 +203,9 @@ const toggleSubmenu = (menu: string) => {
         <li>
           <NuxtLink 
             to="/tasks" 
-            class="flex items-center sidebar-item  p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
+            class="flex items-center sidebar-item p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
             active-class="bg-sidebar-active"
+            @click="closeSidebar"
           >
             <Icon name="mdi:checkbox-marked-circle-plus-outline" class="text-xl mr-3"/>
             <span>Задачи</span>
@@ -198,20 +214,20 @@ const toggleSubmenu = (menu: string) => {
         <li>
           <NuxtLink 
             to="/calendar" 
-            class="flex items-center sidebar-item  p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
+            class="flex items-center sidebar-item p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
             active-class="bg-sidebar-active"
+            @click="closeSidebar"
           >
             <Icon name="mdi:calendar-month" class="text-xl mr-3"/>
             <span>Календарь</span>
           </NuxtLink>
         </li>
-
-
         <li>
           <NuxtLink 
             to="/reports" 
-            class="flex items-center sidebar-item  p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
+            class="flex items-center sidebar-item p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
             active-class="bg-sidebar-active"
+            @click="closeSidebar"
           >
             <Icon name="mdi:chart-box" class="text-xl mr-3"/>
             <span>Отчеты</span>
@@ -219,10 +235,10 @@ const toggleSubmenu = (menu: string) => {
         </li>
         <li class="pt-4 mt-4 border-t border-sidebar-divider">
           <div 
-            class="flex items-center sidebar-item  justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
+            class="flex items-center sidebar-item justify-between p-2 rounded-lg hover:bg-sidebar-hover transition-colors cursor-pointer group"
             @click="toggleSubmenu('settings')"
           >
-            <div class="flex items-center sidebar-item ">
+            <div class="flex items-center sidebar-item">
               <Icon name="mdi:cog" class="text-xl mr-3"/>
               <span>Настройки</span>
             </div>
@@ -241,8 +257,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/settings/users" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:account-supervisor" class="text-lg mr-2"/>
                   <span>Пользователи</span>
@@ -251,8 +268,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/settings/roles" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:shield-account" class="text-lg mr-2"/>
                   <span>Роли и доступы</span>
@@ -261,8 +279,9 @@ const toggleSubmenu = (menu: string) => {
               <li>
                 <NuxtLink 
                   to="/settings/integrations" 
-                  class="flex items-center sidebar-item  p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
+                  class="flex items-center sidebar-item p-1 rounded-lg hover:bg-sidebar-hover transition-colors text-sm"
                   active-class="bg-sidebar-active"
+                  @click="closeSidebar"
                 >
                   <Icon name="mdi:connection" class="text-lg mr-2"/>
                   <span>Интеграции</span>
@@ -276,9 +295,10 @@ const toggleSubmenu = (menu: string) => {
     <div class="pt-4 mt-auto border-t border-sidebar-divider">
       <NuxtLink 
         to="/profile" 
-        class="flex items-center sidebar-item  p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
+        class="flex items-center sidebar-item p-2 rounded-lg hover:bg-sidebar-hover transition-colors"
+        @click="closeSidebar"
       >
-        <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center sidebar-item  justify-center text-white mr-3">
+        <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
           <Icon name="mdi:account" class="text-lg"/>
         </div>
         <div class="flex-1 min-w-0">
@@ -307,19 +327,12 @@ const toggleSubmenu = (menu: string) => {
     0 8px 32px rgba(106, 13, 173, 0.4),
     inset 0 4px 12px rgba(255, 255, 255, 0.1),
     inset 0 -4px 12px rgba(0, 0, 0, 0.3);
-
   transition: all 0.4s ease;
   overflow: hidden;
   position: relative;
 }
 
-@keyframes glass-shine {
-  0% { transform: rotate(30deg) translate(0%, 0%); }
-  50% { transform: rotate(30deg) translate(20%, 20%); }
-  100% { transform: rotate(30deg) translate(-0%, -0%); }
-}
-
-.sidebar-item  {
+.sidebar-item {
   border-radius: 5px !important;
   margin-inline: 10px;
   color: black;
@@ -340,23 +353,20 @@ const toggleSubmenu = (menu: string) => {
   border-color: #ff90d4; 
 }
 
-.transition-all {
-  transition-property: all;
-}
-
-.duration-300 {
-  transition-duration: 300ms;
-}
-
-.ease-in-out {
-  transition-timing-function: ease-in-out;
-}
-
 .max-h-0 {
   max-height: 0;
 }
 
 .max-h-96 {
   max-height: 24rem; 
+}
+
+@media (max-width: 767px) {
+  .bg-sidebar {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+  }
 }
 </style>

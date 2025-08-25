@@ -72,6 +72,7 @@
 </template>
 
 <script setup>
+
 import { computed, reactive, ref } from 'vue'
 import axios from 'axios'
 import { navigateTo } from '#app'

@@ -1,19 +1,19 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-pink-50">
-    <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
-      <h1 class="text-3xl font-semibold text-pink-600 text-center mb-6">Вход в кабинет</h1>
+  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-md bg-white border border-blue-900/20 rounded-2xl p-8">
+      <h1 class="text-3xl font-semibold text-blue-900 text-center mb-6">Вход в кабинет</h1>
 
       <form @submit.prevent="onSubmit" class="space-y-5">
         <!-- Email -->
         <div>
-          <label class="block text-pink-700 mb-1">Email</label>
+          <label class="block text-blue-900 mb-1">Email</label>
           <input
               v-model.trim="form.email"
               type="email"
               required
               placeholder="you@example.com"
               @blur="touch('email')"
-              class="w-full rounded-lg border border-pink-200 focus:border-pink-400 focus:ring focus:ring-pink-200 focus:ring-opacity-50 px-4 py-2 outline-none"
+              class="w-full rounded-lg border border-blue-600 focus:border-blue-400 focus:ring focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2 outline-none"
           />
           <p v-if="touched.email && errors.email" class="text-red-500 text-sm mt-1">
             {{ errors.email }}
@@ -22,7 +22,7 @@
 
         <!-- Password -->
         <div>
-          <label class="block text-pink-700 mb-1">Пароль</label>
+          <label class="block text-blue-900 mb-1">Пароль</label>
           <div class="relative">
             <input
                 v-model.trim="form.password"
@@ -31,12 +31,12 @@
                 minlength="6"
                 placeholder="••••••••"
                 @blur="touch('password')"
-                class="w-full rounded-lg border border-pink-200 focus:border-pink-400 focus:ring focus:ring-pink-200 focus:ring-opacity-50 px-4 py-2 outline-none pr-12"
+                class="w-full rounded-lg border border-blue-600 focus:border-blue-400 focus:ring focus:ring-blue-500 focus:ring-opacity-50 px-4 py-2 outline-none pr-12"
             />
             <button
                 type="button"
                 @click="showPass = !showPass"
-                class="absolute inset-y-0 right-3 flex items-center text-pink-400 hover:text-pink-600"
+                class="absolute inset-y-0 right-3 flex items-center text-blue-500 hover:text-blue-700"
                 :aria-label="showPass ? 'Скрыть пароль' : 'Показать пароль'"
             >
               <span v-if="showPass">🙈</span>
@@ -52,7 +52,7 @@
         <button
             type="submit"
             :disabled="submitting"
-            class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 rounded-lg transition disabled:opacity-60"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition disabled:opacity-60"
         >
           {{ submitting ? 'Входим…' : 'Войти' }}
         </button>
@@ -63,9 +63,9 @@
         </p>
       </form>
 
-      <p class="text-center text-pink-600 mt-6">
+      <p class="text-center text-blue-700 mt-6">
         Нет аккаунта?
-        <a href="/register" class="font-semibold hover:underline">Зарегистрируйтесь</a>
+        <a href="/register" class="font-semibold hover:underline text-blue-900">Зарегистрируйтесь</a>
       </p>
     </div>
   </div>
@@ -73,6 +73,8 @@
 
 <script setup>
 import { computed, reactive, ref } from 'vue'
+import axios from 'axios'
+import { navigateTo } from '#app'
 
 const form = reactive({ email: '', password: '' })
 const touched = reactive({ email: false, password: false })
@@ -108,27 +110,30 @@ async function onSubmit() {
   submitting.value = true
 
   try {
-    const {data, error} = await useFetch(apiUrl + '/login', {
-      method: 'POST',
-      body: {
-        email: form.email,
-        password: form.password
-      }
+    const res = await axios.post(apiUrl + '/login', {
+      email: form.email,
+      password: form.password
     })
 
-    if (error.value) {
-      serverError.value = 'Неверный email или пароль'
-      return
-    }
+    const token = useCookie('auth_token', {
+      maxAge: 60 * 60 * 24 * 7,
+      sameSite: 'strict'
+    })
+    token.value = res.data.token
 
-    const token = useCookie('auth_token')
-    token.value = data.value.token
-
-    // Successful login
-    await navigateTo('/')
+    const router = useRouter()
+    router.push('/')
 
   } catch (err) {
-    serverError.value = 'Произошла ошибка при входе'
+    if (axios.isAxiosError(err)) {
+      if (err.response?.status === 401) {
+        serverError.value = 'Неверный email или пароль'
+      } else {
+        serverError.value = 'Ошибка сервера: ' + (err.response?.data?.message || err.message)
+      }
+    } else {
+      serverError.value = 'Произошла ошибка при входе'
+    }
     console.error('Login error:', err)
   } finally {
     submitting.value = false
